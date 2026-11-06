@@ -1,394 +1,357 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CloudBox - My File Storage</title>
+<title>CloudBox - My Workspace</title>
 
 <style>
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-    background: #0b0a10;
-    color: white;
-}
-
-header {
-    background: #15121f;
-    padding: 20px;
-    border-bottom: 1px solid #30243e;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 27px;
-    font-weight: bold;
-    color: #c084fc;
+  margin: 0;
+  padding: 20px;
+  background: #0b0715;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
 .container {
-    padding: 30px;
+  max-width: 850px;
+  margin: 30px auto;
 }
 
 h1 {
-    margin-bottom: 10px;
+  color: #b78aff;
+  font-size: 35px;
 }
 
-.subtitle {
-    color: #aaa;
-    margin-bottom: 25px;
+.card {
+  background: #191329;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 15px;
+  border: 1px solid #38265b;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #59417f;
+  background: #0e0a19;
+  color: white;
 }
 
 button {
-    background: #9333ea;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 5px;
+  padding: 12px 18px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  background: #8748e8;
+  color: white;
+  cursor: pointer;
 }
 
 button:hover {
-    background: #a855f7;
+  background: #a36aff;
 }
 
-.stats {
-    display: flex;
-    gap: 20px;
-    margin: 25px 0;
-    flex-wrap: wrap;
-}
-
-.stat-box {
-    background: #171420;
-    border: 1px solid #30243e;
-    border-radius: 12px;
-    padding: 20px;
-    flex: 1;
-    min-width: 150px;
-}
-
-.stat-box h3 {
-    color: #c084fc;
-    margin-top: 10px;
-}
-
-.files {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
+#status {
+  color: #c7a8ff;
+  overflow-wrap: anywhere;
 }
 
 .file {
-    background: #171420;
-    border: 1px solid #30243e;
-    border-radius: 12px;
-    padding: 18px;
-    overflow-wrap: anywhere;
+  padding: 12px;
+  margin: 10px 0;
+  background: #261b3b;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
 }
 
-.file-icon {
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-
-.file-name {
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.file-size {
-    color: #aaa;
-    font-size: 13px;
-}
-
-.search {
-    width: 100%;
-    padding: 13px;
-    margin: 20px 0;
-    border: 1px solid #30243e;
-    border-radius: 8px;
-    background: #171420;
-    color: white;
-}
-
-.empty {
-    color: #aaa;
-    padding: 30px;
-    text-align: center;
-}
-
-.delete-btn {
-    background: #be123c;
-    margin-top: 12px;
-}
-
-.download-btn {
-    margin-top: 12px;
-}
-
-footer {
-    text-align: center;
-    color: #777;
-    padding: 25px;
+.hidden {
+  display: none;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">☁ CloudBox</div>
-    <div>My Personal Storage</div>
-</header>
-
 <div class="container">
 
-    <h1>My Workspace</h1>
-    <p class="subtitle">Your files, your space, your world.</p>
+<h1>☁ CloudBox</h1>
+<p>My Workspace | Cloud Storage</p>
 
-    <button onclick="document.getElementById('upload').click()">
-        📤 Upload Files
-    </button>
+<div class="card">
 
-    <button onclick="createFolder()">
-        📁 New Folder
-    </button>
+<h2>Account</h2>
 
-    <input type="file" id="upload" multiple hidden>
+<input id="email" type="email"
+placeholder="Enter your email">
 
-    <div class="stats">
-        <div class="stat-box">
-            Total Files
-            <h3 id="totalFiles">0</h3>
-        </div>
+<input id="password" type="password"
+placeholder="Enter your password">
 
-        <div class="stat-box">
-            Storage Used
-            <h3 id="storage">0 KB</h3>
-        </div>
+<button id="signup">Create Account</button>
+<button id="login">Login</button>
+<button id="logout">Logout</button>
 
-        <div class="stat-box">
-            Status
-            <h3>Offline Ready</h3>
-        </div>
-    </div>
-
-    <input
-        type="text"
-        class="search"
-        id="search"
-        placeholder="🔍 Search your files..."
-        oninput="displayFiles()"
-    >
-
-    <h2>📂 My Files</h2>
-
-    <div class="files" id="files">
-        <div class="empty">No files uploaded yet.</div>
-    </div>
+<p id="status">Please create an account or log in.</p>
 
 </div>
 
-<footer>
-    CloudBox © 2026 | Personal File Storage
-</footer>
+<div class="card">
 
-<script>
-let files = [];
+<h2>Upload Files</h2>
 
-const uploadInput = document.getElementById("upload");
+<input type="file" id="fileInput">
 
-uploadInput.addEventListener("change", function() {
+<button id="upload">Upload File</button>
 
-    for (let file of this.files) {
+</div>
 
-        files.push(file);
+<div class="card">
 
-    }
+<h2>My Files</h2>
 
-    displayFiles();
+<button id="refresh">Refresh Files</button>
 
-    this.value = "";
+<div id="fileList">
+Your files will appear here.
+</div>
 
-});
+</div>
 
-function displayFiles() {
-
-    let container = document.getElementById("files");
-
-    let search = document.getElementById("search").value.toLowerCase();
-
-    container.innerHTML = "";
-
-    let totalSize = 0;
-
-    let count = 0;
-
-    files.forEach((file, index) => {
-
-        totalSize += file.size;
-
-        if (!file.name.toLowerCase().includes(search)) {
-            return;
-        }
-
-        count++;
-
-        let div = document.createElement("div");
-
-        div.className = "file";
-
-        div.innerHTML = `
-            <div class="file-icon">📄</div>
-
-            <div class="file-name">${escapeHTML(file.name)}</div>
-
-            <div class="file-size">${formatSize(file.size)}</div>
-
-            <button class="download-btn">⬇ Download</button>
-
-            <button class="delete-btn">🗑 Delete</button>
-        `;
-
-        div.querySelector(".download-btn").onclick = function() {
-            downloadFile(file);
-        };
-
-        div.querySelector(".delete-btn").onclick = function() {
-            files.splice(index, 1);
-            displayFiles();
-        };
-
-        container.appendChild(div);
-
-    });
-
-    if (count === 0) {
-        container.innerHTML = '<div class="empty">No files found.</div>';
-    }
-
-    document.getElementById("totalFiles").textContent = files.length;
-
-    document.getElementById("storage").textContent = formatSize(totalSize);
-
-}
-
-function downloadFile(file) {
-
-    let url = URL.createObjectURL(file);
-
-    let a = document.createElement("a");
-
-    a.href = url;
-
-    a.download = file.name;
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
-}
-
-function formatSize(bytes) {
-
-    if (bytes < 1024) return bytes + " B";
-
-    if (bytes < 1048576)
-        return (bytes / 1024).toFixed(2) + " KB";
-
-    return (bytes / 1048576).toFixed(2) + " MB";
-
-}
-
-function createFolder() {
-
-    let name = prompt("Enter folder name:");
-
-    if (name) {
-        alert("Folder '" + name + "' created! (Demo)");
-    }
-
-}
-
-function escapeHTML(text) {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
-}
-</script>
-
-<div style="background:#171326;color:white;padding:20px;border-radius:15px;margin:20px;">
-  <h2>CloudBox Cloud Storage</h2>
-
-  <input id="email" type="email" placeholder="Email"><br><br>
-  <input id="password" type="password" placeholder="Password"><br><br>
-
-  <button id="signup">Create Account</button>
-  <button id="login">Login</button>
-  <button id="logout">Logout</button>
-
-  <hr>
-
-  <input type="file" id="fileInput">
-  <button id="upload">Upload File</button>
-
-  <p id="status">Please log in.</p>
-  <div id="fileList"></div>
 </div>
 
 <script type="module">
+
 import { createClient } from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+// SUPABASE CONNECTION
+
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+
+const SUPABASE_KEY = 'YOUR_PUBLISHABLE_KEY';
+
 const supabase = createClient(
-  'https://hdvxpptoyhiepwdewjit.supabase.co/rest/v1/',
-  'sb_publishable_Q6zD6N2Di5tqyEyQhvoKnQ_PZSwM5hq'
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
 
-const bucket = 'cloudbox-files';
+const BUCKET = 'cloudbox-files';
 
 const status = document.getElementById('status');
 
-async function showFiles() {
-  const { data: { user } } = await supabase.auth.getUser();
+const fileList = document.getElementById('fileList');
 
-  if (!user) return;
 
-  const { data, error } = await supabase.storage
-    .from(bucket)
-    .list(user.id);
+// GET CURRENT USER
+
+async function getUser() {
+
+  const { data, error } =
+    await supabase.auth.getUser();
+
+  if (error) return null;
+
+  return data.user;
+}
+
+
+// CREATE ACCOUNT
+
+document.getElementById('signup').onclick =
+async function() {
+
+  const email =
+    document.getElementById('email').value;
+
+  const password =
+    document.getElementById('password').value;
+
+  if (!email || !password) {
+    status.textContent = 'Enter email and password.';
+    return;
+  }
+
+  status.textContent = 'Creating account...';
+
+  const { data, error } =
+    await supabase.auth.signUp({
+      email: email,
+      password: password
+    });
 
   if (error) {
     status.textContent = error.message;
     return;
   }
 
-  const list = document.getElementById('fileList');
-  list.replaceChildren();
+  if (data.session) {
+    status.textContent = 'Account created and logged in!';
+    loadFiles();
+  } else {
+    status.textContent =
+      'Account created! Check your email for confirmation, then log in.';
+  }
 
-  for (const file of data) {
-    const row = document.createElement('p');
-    const button = document.createElement('button');
+};
 
-    row.append(document.createTextNode(file.name + ' '));
 
-    button.textContent = 'Download';
+// LOGIN
 
-    button.onclick = async () => {
+document.getElementById('login').onclick =
+async function() {
+
+  const email =
+    document.getElementById('email').value;
+
+  const password =
+    document.getElementById('password').value;
+
+  if (!email || !password) {
+    status.textContent = 'Enter email and password.';
+    return;
+  }
+
+  status.textContent = 'Logging in...';
+
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+  if (error) {
+    status.textContent = error.message;
+    return;
+  }
+
+  status.textContent = 'Login successful!';
+
+  loadFiles();
+
+};
+
+
+// LOGOUT
+
+document.getElementById('logout').onclick =
+async function() {
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    status.textContent = error.message;
+    return;
+  }
+
+  fileList.textContent = 'Please log in.';
+
+  status.textContent = 'Logged out.';
+
+};
+
+
+// UPLOAD FILE
+
+document.getElementById('upload').onclick =
+async function() {
+
+  const user = await getUser();
+
+  if (!user) {
+    status.textContent = 'Please log in first.';
+    return;
+  }
+
+  const file =
+    document.getElementById('fileInput').files[0];
+
+  if (!file) {
+    status.textContent = 'Choose a file first.';
+    return;
+  }
+
+  status.textContent = 'Uploading...';
+
+  const path =
+    user.id + '/' + Date.now() + '_' + file.name;
+
+  const { error } = await supabase.storage
+    .from(BUCKET)
+    .upload(path, file);
+
+  if (error) {
+    status.textContent = error.message;
+    return;
+  }
+
+  status.textContent = 'File uploaded successfully!';
+
+  document.getElementById('fileInput').value = '';
+
+  loadFiles();
+
+};
+
+
+// SHOW FILES
+
+async function loadFiles() {
+
+  const user = await getUser();
+
+  if (!user) {
+    fileList.textContent = 'Please log in first.';
+    return;
+  }
+
+  fileList.textContent = 'Loading files...';
+
+  const { data, error } = await supabase.storage
+    .from(BUCKET)
+    .list(user.id);
+
+  if (error) {
+    fileList.textContent = error.message;
+    return;
+  }
+
+  fileList.replaceChildren();
+
+  if (!data || data.length === 0) {
+    fileList.textContent = 'No files uploaded yet.';
+    return;
+  }
+
+  data.forEach(file => {
+
+    const row = document.createElement('div');
+
+    row.className = 'file';
+
+    const name = document.createElement('span');
+
+    name.textContent = file.name + ' ';
+
+    const download = document.createElement('button');
+
+    download.textContent = 'Download';
+
+    download.onclick = async function() {
+
+      const path = user.id + '/' + file.name;
+
       const { data, error } = await supabase.storage
-        .from(bucket)
-        .createSignedUrl(user.id + '/' + file.name, 60);
+        .from(BUCKET)
+        .createSignedUrl(path, 60);
 
       if (error) {
         status.textContent = error.message;
@@ -396,69 +359,42 @@ async function showFiles() {
       }
 
       window.open(data.signedUrl, '_blank');
+
     };
 
-    row.append(button);
-    list.append(row);
-  }
+    row.append(name, download);
+
+    fileList.append(row);
+
+  });
+
 }
 
-document.getElementById('signup').onclick = async () => {
-  const { error } = await supabase.auth.signUp({
-    email: document.getElementById('email').value,
-    password: document.getElementById('password').value
-  });
 
-  status.textContent = error ? error.message :
-    'Account created! Check your email if confirmation is required.';
+// REFRESH FILES
+
+document.getElementById('refresh').onclick =
+function() {
+  loadFiles();
 };
 
-document.getElementById('login').onclick = async () => {
-  const { error } = await supabase.auth.signInWithPassword({
-    email: document.getElementById('email').value,
-    password: document.getElementById('password').value
-  });
 
-  status.textContent = error ? error.message : 'Login successful!';
-  if (!error) showFiles();
-};
+// CHECK EXISTING LOGIN
 
-document.getElementById('logout').onclick = async () => {
-  await supabase.auth.signOut();
-  document.getElementById('fileList').replaceChildren();
-  status.textContent = 'Logged out.';
-};
+supabase.auth.onAuthStateChange(
+  (event, session) => {
 
-document.getElementById('upload').onclick = async () => {
-  const { data: { user } } = await supabase.auth.getUser();
+    if (session) {
+      status.textContent = 'Logged in!';
+      loadFiles();
+    } else {
+      fileList.textContent = 'Please log in.';
+    }
 
-  if (!user) {
-    status.textContent = 'Please log in first.';
-    return;
   }
-
-  const file = document.getElementById('fileInput').files[0];
-
-  if (!file) {
-    status.textContent = 'Choose a file first.';
-    return;
-  }
-
-  const path = user.id + '/' + Date.now() + '_' + file.name;
-
-  const { error } = await supabase.storage
-    .from(bucket)
-    .upload(path, file);
-
-  status.textContent = error ? error.message : 'Upload successful!';
-  if (!error) showFiles();
-};
-
-supabase.auth.onAuthStateChange((event, session) => {
-  if (session) showFiles();
-});
+);
 
 </script>
+
 </body>
 </html>
-```
